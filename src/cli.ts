@@ -1,8 +1,8 @@
-import { main, Options } from './main';
 import * as fs from 'fs';
+import { main, Options } from './main';
 
-let name = 'sql-to-ts';
-let version = '1.0.0';
+const name = 'sql-to-ts';
+const version = '1.0.0';
 
 function help(): string {
   return `${name}, version ${version}
@@ -16,7 +16,7 @@ Options:
   -h, --help             Display help and usage details`;
 }
 
-let options: Options = {
+const options: Options = {
   filenames: [],
   tsDir: 'out',
   clean: false,
@@ -24,7 +24,7 @@ let options: Options = {
 };
 
 for (let i = 2; i < process.argv.length; i++) {
-  let arg = process.argv[i];
+  const arg = process.argv[i];
   switch (arg) {
     case '-h':
     case '--help':
@@ -46,7 +46,7 @@ for (let i = 2; i < process.argv.length; i++) {
       break;
     default:
       try {
-        let stat = fs.statSync(arg);
+        const stat = fs.statSync(arg);
         if (!stat.isFile()) {
           console.error('Error:', arg, 'is not an file');
           process.exit(1);
@@ -72,5 +72,3 @@ if (options.filenames.length < 1) {
 }
 
 main(options);
-
-

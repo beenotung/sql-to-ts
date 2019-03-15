@@ -1,5 +1,5 @@
 export function compare(a: string | number, b: string | number): -1 | 0 | 1 {
-  return a < b ? -1 : (a > b ? 1 : 0);
+  return a < b ? -1 : a > b ? 1 : 0;
 }
 
 export type compare_chunks = Array<string | number>;
@@ -10,8 +10,8 @@ export type compare_chunks = Array<string | number>;
 // }
 
 function toNum(s: string, i: number): number | false {
-  let code = s.charCodeAt(i);
-  if (48 <= code && code <= (48 + 10)) {
+  const code = s.charCodeAt(i);
+  if (48 <= code && code <= 48 + 10) {
     return code - 48;
   } else {
     return false;
@@ -21,7 +21,7 @@ function toNum(s: string, i: number): number | false {
 function parseString(s: string, i: number, res: compare_chunks): void {
   let acc = '';
   for (; i < s.length; i++) {
-    let num = toNum(s, i);
+    const num = toNum(s, i);
     if (num === false) {
       acc += s[i];
     } else {
@@ -37,9 +37,14 @@ function parseString(s: string, i: number, res: compare_chunks): void {
   }
 }
 
-function parseNumber(s: string, i: number, acc: number, res: compare_chunks): void {
+function parseNumber(
+  s: string,
+  i: number,
+  acc: number,
+  res: compare_chunks,
+): void {
   for (; i < s.length; i++) {
-    let num = toNum(s, i);
+    const num = toNum(s, i);
     if (num === false) {
       res.push(acc);
       parseString(s, i, res);
@@ -51,17 +56,17 @@ function parseNumber(s: string, i: number, acc: number, res: compare_chunks): vo
 }
 
 export function split_string(s: string): compare_chunks {
-  let acc: compare_chunks = [];
+  const acc: compare_chunks = [];
   parseString(s, 0, acc);
   return acc;
 }
 
 export function compare_string(a: string, b: string): -1 | 0 | 1 {
-  let as = split_string(a);
-  let bs = split_string(b);
-  let n = Math.min(as.length, bs.length);
+  const as = split_string(a);
+  const bs = split_string(b);
+  const n = Math.min(as.length, bs.length);
   for (let i = 0; i < n; i++) {
-    let res = compare(as[i], bs[i]);
+    const res = compare(as[i], bs[i]);
     if (res !== 0) {
       return res;
     }

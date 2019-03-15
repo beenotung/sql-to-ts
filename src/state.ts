@@ -12,22 +12,22 @@ mappedTypes.set('blob', 'Blob | Buffer | string');
 mappedTypes.set('longblob', 'Blob | Buffer | string');
 
 export interface Field {
-  name: string
-  type: string
+  name: string;
+  type: string;
 }
 
 export interface Table {
-  name: string
-  fields: Field[]
+  name: string;
+  fields: Field[];
 }
 
 export let tables = new Map<string, Table>();
 
 export interface Enum {
-  table: string
-  field: string
-  name: string
-  values: string[]
+  table: string;
+  field: string;
+  name: string;
+  values: string[];
 }
 
 /**
@@ -39,9 +39,8 @@ export function enumName(table: string, field: string) {
   return `${table}_${field}_enum`;
 }
 
-
 export function registerEnum(table: string, field: string, values: string[]) {
-  let e: Enum = {
+  const e: Enum = {
     table,
     field,
     name: enumName(table, field),
@@ -56,6 +55,6 @@ export function registerEnum(table: string, field: string, values: string[]) {
 
 export function hasEnum(name: string) {
   let found = false;
-  tableEnums.forEach(enums => found = found || enums.has(name));
+  tableEnums.forEach(enums => (found = found || enums.has(name)));
   return found;
 }

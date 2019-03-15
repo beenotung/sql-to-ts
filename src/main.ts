@@ -1,21 +1,23 @@
-import { readSQLFile } from './reader';
 import del from 'del';
+import { readSQLFile } from './reader';
 import { writeTsFiles } from './ts-generator';
 
 export interface Options {
-  filenames: string[]
-  tsDir: string
-  clean?: boolean
-  quiet?: boolean
+  filenames: string[];
+  tsDir: string;
+  clean?: boolean;
+  quiet?: boolean;
 }
 
 export async function main(options: Options) {
-  await Promise.all(options.filenames.map(filename => {
-    if (!options.quiet) {
-      console.log('reading', filename);
-    }
-    return readSQLFile(filename);
-  }));
+  await Promise.all(
+    options.filenames.map(filename => {
+      if (!options.quiet) {
+        console.log('reading', filename);
+      }
+      return readSQLFile(filename);
+    }),
+  );
 
   if (options.clean) {
     if (!options.quiet) {
