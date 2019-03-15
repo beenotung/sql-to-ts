@@ -39,29 +39,23 @@ export function enumName(table: string, field: string) {
   return `${table}_${field}_enum`;
 }
 
-function mapGetOrSetDefault<K, V>(map: Map<K, V>, key: K, f: () => V): V {
-  if (map.has(key)) {
-    return map.get(key)
-  }
-  let value = f();
-  map.set(key, value);
-  return value
-}
 
 export function registerEnum(table: string, field: string, values: string[]) {
   let e: Enum = {
     table,
     field,
     name: enumName(table, field),
-    values
+    values,
   };
-  mapGetOrSetDefault(tableEnums, e.table, () => new Map())
-    .set(e.name, e);
+  if (!tableEnums.has(e.table)) {
+    tableEnums.set(e.table, new Map());
+  }
+  tableEnums.get(e.table).set(e.name, e);
   return e;
 }
 
 export function hasEnum(name: string) {
   let found = false;
   tableEnums.forEach(enums => found = found || enums.has(name));
-  return found
+  return found;
 }

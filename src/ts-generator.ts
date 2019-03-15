@@ -1,20 +1,32 @@
-import {mappedTypes, Table, tableEnums, tables} from "./state";
+import { mappedTypes, Table, tableEnums, tables } from './state';
 import * as mkdirp from 'mkdirp';
-import * as util from "util";
-import * as path from "path";
-import * as fs from "fs";
+import * as util from 'util';
+import * as path from 'path';
+import * as fs from 'fs';
+import { compare_string } from './utils/compare';
 
 let async = {
   mkdirp: util.promisify(mkdirp),
-  writeFile: util.promisify(fs.writeFile)
+  writeFile: util.promisify(fs.writeFile),
 };
 
 export function genTsTypes(): string {
-  let types = '';
+  // let types = '';
+  let type_codes: Array<[string, string]> = [];
   mappedTypes.forEach((type, name) => {
-    types += `export type ${name} = ${type};\n`
+    // types += `export type ${name} = ${type};\n`;
+    let code = `export type ${name} = ${type};\n`;
+    type_codes.push([type, code]);
   });
-  return types;
+  type_codes.sort((a, b) => {
+    let res = compare_string(a[0], b[0]);
+    if (res === 0) {
+      return compare_string(a[1], b[1]);
+    }
+    return res;
+  });
+  return type_codes.map(x => x[1]).join('');
+  // return types;
 }
 
 export function genTsTable(table: Table): string {
@@ -28,8 +40,8 @@ export function genTsTable(table: Table): string {
       e.values.forEach(value => {
         s += `  ${value} = ${value},\n`;
       });
-      s += '}\n\n'
-    })
+      s += '}\n\n';
+    });
   }
 
   /* interface */
@@ -39,7 +51,7 @@ export function genTsTable(table: Table): string {
     if (mappedTypes.has(field.type)) {
       imports.add(field.type);
     }
-    s += `  ${field.name}: ${field.type}\n`
+    s += `  ${field.name}: ${field.type}\n`;
   });
   s += '}\n';
 
@@ -48,7 +60,7 @@ export function genTsTable(table: Table): string {
     let t = 'import { ';
     t += Array.from(imports).sort().map(type => type).join(', ');
     t += ' ';
-    t += "} from '../sql.types';\n\n";
+    t += '} from \'../sql.types\';\n\n';
     s = t + s;
   }
 
@@ -62,15 +74,15 @@ export async function writeTsFiles(dirname: string) {
   tables.forEach(table => {
     let filename = path.join(dirname, 'tables', table.name + '.ts');
     let content = genTsTable(table);
-    ps.push(async.writeFile(filename, content))
+    ps.push(async.writeFile(filename, content));
   });
   ps.push((async () => {
     let filename = path.join(dirname, 'sql.types.ts');
     let content = genTsTypes();
     if (content.trim().length === 0) {
-      return
+      return;
     }
-    return async.writeFile(filename, content)
+    return async.writeFile(filename, content);
   })());
   await Promise.all(ps);
 }
