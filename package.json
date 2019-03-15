@@ -1,13 +1,9 @@
 {
   "name": "sql-to-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "Generate Typescript from SQL",
   "keywords": [],
-  "author": {
-    "name": "Beeno Tung",
-    "email": "aabbcc1241@yahoo.com.hk",
-    "url": "https://beeno-tung.surge.sh"
-  },
+  "author": "Beeno Tung <aabbcc1241@yahoo.com.hk> (https://beeno-tung.surge.sh)",
   "license": "BSD-2-Clause",
   "bin": {
     "sql-to-ts": "./index.js"
@@ -46,5 +42,14 @@
   "dependencies": {
     "cli": "^1.0.1",
     "mkdirp": "^0.5.1"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/sql-to-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beenotung/sql-to-ts/issues"
+  },
+  "homepage": "https://github.com/beenotung/sql-to-ts#readme"
 }
