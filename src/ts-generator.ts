@@ -67,20 +67,27 @@ export function genTsTable(table: Table): string {
   return s;
 }
 
-export async function writeTsFiles(dirname: string) {
-  await async.mkdirp(dirname);
-  await async.mkdirp(path.join(dirname, 'tables'));
+export async function writeTsFiles(options: { tsDir: string, quiet?: boolean }) {
+  let { tsDir, quiet } = options;
+  await async.mkdirp(tsDir);
+  await async.mkdirp(path.join(tsDir, 'tables'));
   let ps = [];
   tables.forEach(table => {
-    let filename = path.join(dirname, 'tables', table.name + '.ts');
+    let filename = path.join(tsDir, 'tables', table.name + '.ts');
     let content = genTsTable(table);
+    if (!quiet) {
+      console.log('saving to', filename);
+    }
     ps.push(async.writeFile(filename, content));
   });
   ps.push((async () => {
-    let filename = path.join(dirname, 'sql.types.ts');
+    let filename = path.join(tsDir, 'sql.types.ts');
     let content = genTsTypes();
     if (content.trim().length === 0) {
       return;
+    }
+    if (!quiet) {
+      console.log('saving to', filename);
     }
     return async.writeFile(filename, content);
   })());

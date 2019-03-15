@@ -31,6 +31,7 @@
     "test": "test"
   },
   "devDependencies": {
+    "@types/cli": "^0.11.19",
     "@types/node": "^8.10.44",
     "del": "^4.0.0",
     "del-cli": "^1.1.0",
@@ -42,6 +43,7 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
+    "cli": "^1.0.1",
     "mkdirp": "^0.5.1"
   }
 }
