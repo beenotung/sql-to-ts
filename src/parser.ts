@@ -152,6 +152,7 @@ function mapEnum(s: string, context: { tableName: string }): string {
 
 
 function mapCreateTable(s: string): Table {
+  s = s.replace(/.*\)(.*);/, '');
   let ss = s.split('(');
   let tableName = mapFieldName(ss.shift().split(' ')[2]);
   s = ss.join('(');

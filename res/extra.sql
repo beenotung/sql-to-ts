@@ -1,19 +1,15 @@
-CREATE TABLE `donates` (
+-- enum, longblob, date, engine
+CREATE TABLE `core_users_info` (
   `raw_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `donate_type` varchar(25) DEFAULT NULL,
-  `donate_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `donate_privacy` enum('public','followers','self') NOT NULL DEFAULT 'public',
-  `donate_anonymous` enum('n','y') NOT NULL DEFAULT 'n',
-  `donate_status` enum('ok','blocked') NOT NULL DEFAULT 'ok',
-  `created_datetime` datetime NOT NULL,
-  `admin_remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `donate_files` (
-  `raw_id` int(11) NOT NULL,
-  `donate_id` int(11) NOT NULL,
-  `file_mime` varchar(20) NOT NULL,
-  `file_blob` longblob NOT NULL,
-  `created_datetime` datetime NOT NULL
+  `displayname` varchar(35) NOT NULL DEFAULT '未命名',
+  `icon_itype` varchar(15) DEFAULT NULL,
+  `icon_image` longblob,
+  `gender` enum('f','m','o') DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `tel` varchar(15) DEFAULT NULL,
+  `facebook` text,
+  `authenemail` varchar(150) DEFAULT NULL,
+  `interview_date` date DEFAULT NULL,
+  `verified_level` enum('red','gray','yellow','green') NOT NULL DEFAULT 'red',
+  `datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

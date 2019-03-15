@@ -45,9 +45,10 @@ export function genTsTable(table: Table): string {
 
   /* import */
   if (imports.size > 0) {
-    let t = `import {`;
-    t += Array.from(imports).map(type => type).join(', ');
-    t += `} from '../sql.types';\n\n`;
+    let t = 'import { ';
+    t += Array.from(imports).sort().map(type => type).join(', ');
+    t += ' ';
+    t += "} from '../sql.types';\n\n";
     s = t + s;
   }
 

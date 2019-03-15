@@ -1,8 +1,13 @@
 export let mappedTypes = new Map<string, string>();
+
 mappedTypes.set('longtext', 'string');
 mappedTypes.set('text', 'string');
+
 mappedTypes.set('double', 'number');
+
 mappedTypes.set('datetime', 'string');
+mappedTypes.set('date', 'string');
+
 mappedTypes.set('blob', 'Blob | Buffer | string');
 mappedTypes.set('longblob', 'Blob | Buffer | string');
 
