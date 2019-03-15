@@ -18,7 +18,7 @@ Options:
 
 let options: Options = {
   filenames: [],
-  tsDir: null,
+  tsDir: 'out',
   clean: false,
   quiet: false,
 };

@@ -9,8 +9,9 @@
     "url": "https://beeno-tung.surge.sh"
   },
   "license": "BSD-2-Clause",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "bin": {
+    "sql-to-ts": "./index.js"
+  },
   "scripts": {
     "test": "npm run rawtest",
     "clean": "del-cli dist",
