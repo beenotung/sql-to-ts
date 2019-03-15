@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { main, Options } from './main';
 
 const name = 'sql-to-ts';
-const version = '1.0.0';
+const version = '1.0.3';
 
 function help(): string {
   return `${name}, version ${version}
