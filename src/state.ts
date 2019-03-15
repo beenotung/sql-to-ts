@@ -3,7 +3,7 @@ export let mappedTypes = new Map<string, string>();
 mappedTypes.set('longtext', 'string');
 mappedTypes.set('text', 'string');
 
-mappedTypes.set('double', 'number');
+mappedTypes.set('double', 'number | string');
 
 mappedTypes.set('datetime', 'string');
 mappedTypes.set('date', 'string');

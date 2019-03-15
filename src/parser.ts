@@ -81,17 +81,18 @@ function mapFieldName(s: string): string {
 }
 
 function mapFieldType(s: string): string {
-  if (
-    s.startsWith('varchar') ||
+  if (s.startsWith('varchar')) {
+    s = s.replace('(', '_').replace(')', '');
+    mappedTypes.set(s, 'string');
+  } else if (
     s.startsWith('bigint') ||
     s.startsWith('smallint') ||
     s.startsWith('tinyint') ||
     s.startsWith('int')
   ) {
     s = s.replace('(', '_').replace(')', '');
-    mappedTypes.set(s, 'string');
-  }
-  if (s.startsWith('datetime')) {
+    mappedTypes.set(s, 'number | string');
+  } else if (s.startsWith('datetime')) {
     s = s.replace('(', '_').replace(')', '');
     if (s !== 'datetime') {
       mappedTypes.set(s, 'datetime');
