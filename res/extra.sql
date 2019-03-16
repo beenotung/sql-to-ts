@@ -13,3 +13,13 @@ CREATE TABLE `core_users_info` (
   `verified_level` enum('red','gray','yellow','green') NOT NULL DEFAULT 'red',
   `datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- int, float, primary key
+CREATE TABLE ranking (
+    raw_id INT UNSIGNED AUTO_INCREMENT,
+    user_id INT UNSIGNED,
+    step BIGINT UNSIGNED,
+    score FLOAT,
+    ranking INT UNSIGNED,
+    PRIMARY KEY (raw_id)
+);

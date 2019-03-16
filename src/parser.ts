@@ -1,4 +1,11 @@
-import { hasEnum, mappedTypes, registerEnum, Table, tables } from './state';
+import {
+  hasEnum,
+  hasType,
+  mappedTypes,
+  registerEnum,
+  Table,
+  tables,
+} from './state';
 
 function fixLineFeed(s: string) {
   return s.replace(/\r\n/g, '\n');
@@ -98,7 +105,7 @@ function mapFieldType(s: string): string {
       mappedTypes.set(s, 'datetime');
     }
   }
-  if (!mappedTypes.has(s) && !hasEnum(s)) {
+  if (!hasType(s) && !hasEnum(s)) {
     console.error('Error: unsupported sql type:', s);
     process.exit(1);
   }

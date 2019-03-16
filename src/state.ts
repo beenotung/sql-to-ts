@@ -3,13 +3,20 @@ export let mappedTypes = new Map<string, string>();
 mappedTypes.set('longtext', 'string');
 mappedTypes.set('text', 'string');
 
+mappedTypes.set('int', 'number | string');
+mappedTypes.set('float', 'number | string');
 mappedTypes.set('double', 'number | string');
+mappedTypes.set('bigint', 'number | string');
 
 mappedTypes.set('datetime', 'string');
 mappedTypes.set('date', 'string');
 
 mappedTypes.set('blob', 'Blob | Buffer | string');
 mappedTypes.set('longblob', 'Blob | Buffer | string');
+
+export function hasType(name: string) {
+  return mappedTypes.has(name) || mappedTypes.has(name.toLowerCase());
+}
 
 export interface Field {
   name: string;
