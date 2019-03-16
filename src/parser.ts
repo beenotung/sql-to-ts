@@ -88,6 +88,7 @@ function mapFieldName(s: string): string {
 }
 
 function mapFieldType(s: string): string {
+  s = s.toLowerCase();
   if (s.startsWith('varchar')) {
     s = s.replace('(', '_').replace(')', '');
     mappedTypes.set(s, 'string');
@@ -176,6 +177,7 @@ function mapCreateTable(s: string): Table {
     .map(s => s.trim())
     .filter(s => s.length > 0)
     .filter(s => !s.startsWith(')'))
+    .filter(s => !s.toLowerCase().startsWith('primary key'))
     .map(s => {
       const ss = s.split(' ');
       const name = mapFieldName(ss[0]);

@@ -15,7 +15,8 @@ mappedTypes.set('blob', 'Blob | Buffer | string');
 mappedTypes.set('longblob', 'Blob | Buffer | string');
 
 export function hasType(name: string) {
-  return mappedTypes.has(name) || mappedTypes.has(name.toLowerCase());
+  // return mappedTypes.has(name) || mappedTypes.has(name.toLowerCase());
+  return mappedTypes.has(name);
 }
 
 export interface Field {
