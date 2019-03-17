@@ -10,11 +10,23 @@ const async = {
   writeFile: util.promisify(fs.writeFile),
 };
 
+function typeToTs(s: string): string {
+  switch (s) {
+    case 'bigint':
+      return 'mysql_bigint';
+    case 'varchar':
+      return 'string';
+    default:
+      return s;
+  }
+}
+
 export function genTsTypes(): string {
   // let types = '';
   const type_codes: Array<[string, string]> = [];
   mappedTypes.forEach((type, name) => {
-    // types += `export type ${name} = ${type};\n`;
+    name = typeToTs(name);
+    type = typeToTs(type);
     const code = `export type ${name} = ${type};\n`;
     type_codes.push([type, code]);
   });
@@ -48,10 +60,11 @@ export function genTsTable(table: Table): string {
   s += 'export interface ' + table.name + ' {\n';
   const imports = new Set<string>();
   table.fields.forEach(field => {
+    const type = typeToTs(field.type);
     if (mappedTypes.has(field.type)) {
-      imports.add(field.type);
+      imports.add(type);
     }
-    s += `  ${field.name}: ${field.type}\n`;
+    s += `  ${field.name}: ${type}\n`;
   });
   s += '}\n';
 

@@ -1,11 +1,4 @@
-import {
-  hasEnum,
-  hasType,
-  mappedTypes,
-  registerEnum,
-  Table,
-  tables,
-} from './state';
+import { mappedTypes, mapType, registerEnum, Table, tables } from './state';
 
 function fixLineFeed(s: string) {
   return s.replace(/\r\n/g, '\n');
@@ -88,29 +81,7 @@ function mapFieldName(s: string): string {
 }
 
 function mapFieldType(s: string): string {
-  s = s.toLowerCase();
-  if (s.startsWith('varchar')) {
-    s = s.replace('(', '_').replace(')', '');
-    mappedTypes.set(s, 'string');
-  } else if (
-    s.startsWith('bigint') ||
-    s.startsWith('smallint') ||
-    s.startsWith('tinyint') ||
-    s.startsWith('int')
-  ) {
-    s = s.replace('(', '_').replace(')', '');
-    mappedTypes.set(s, 'number | string');
-  } else if (s.startsWith('datetime')) {
-    s = s.replace('(', '_').replace(')', '');
-    if (s !== 'datetime') {
-      mappedTypes.set(s, 'datetime');
-    }
-  }
-  if (!hasType(s) && !hasEnum(s)) {
-    console.error('Error: unsupported sql type:', s);
-    process.exit(1);
-  }
-  return s;
+  return mapType(s);
 }
 
 function mapDecimal(s: string): string {
