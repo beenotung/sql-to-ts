@@ -1,6 +1,6 @@
 {
   "name": "sql-to-ts",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generate Typescript from SQL",
   "keywords": [],
   "author": "Beeno Tung <aabbcc1241@yahoo.com.hk> (https://beeno-tung.surge.sh)",
