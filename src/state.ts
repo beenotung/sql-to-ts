@@ -10,7 +10,7 @@ mappedTypes.set('bigint', 'number | string');
 mappedTypes.set('float', 'number | string');
 mappedTypes.set('double', 'number | string');
 
-mappedTypes.set('datetime', 'string');
+mappedTypes.set('datetime', 'string | Date');
 mappedTypes.set('date', 'string');
 
 mappedTypes.set('blob', 'Blob | Buffer | string');
