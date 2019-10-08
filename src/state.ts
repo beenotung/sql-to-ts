@@ -5,6 +5,7 @@ mappedTypes.set('text', 'string');
 
 mappedTypes.set('tinyint', 'number | string');
 mappedTypes.set('smallint', 'number | string');
+mappedTypes.set('mediumint', 'number | string');
 mappedTypes.set('int', 'number | string');
 mappedTypes.set('bigint', 'number | string');
 mappedTypes.set('float', 'number | string');
@@ -20,6 +21,7 @@ const bracketedTypes: string[] = [
   'varchar',
   'tinyint',
   'smallint',
+  'mediumint',
   'int',
   'bigint',
   'datetime',
