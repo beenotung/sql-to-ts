@@ -84,7 +84,7 @@ export function hasEnum(name: string) {
 
 export function mapType(s: string): string {
   s = s.toLowerCase();
-  s = s.replace(/^bigint/, 'bigint');
+  // s = s.replace(/^bigint/, 'bigint');
   if (hasType(s) || hasEnum(s)) {
     return s;
   }
