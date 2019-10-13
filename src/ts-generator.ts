@@ -14,6 +14,7 @@ function typeToTs(s: string): string {
   switch (s) {
     case 'bigint':
       return 'mysql_bigint';
+    case 'char':
     case 'varchar':
       return 'string';
     default:
