@@ -1,6 +1,7 @@
 export let mappedTypes = new Map<string, string>();
 
 mappedTypes.set('longtext', 'string');
+mappedTypes.set('mediumtext', 'string');
 mappedTypes.set('text', 'string');
 
 mappedTypes.set('tinyint', 'number | string');
@@ -19,6 +20,7 @@ mappedTypes.set('longblob', 'Blob | Buffer | string');
 
 const bracketedTypes: string[] = [
   'varchar',
+  'char',
   'tinyint',
   'smallint',
   'mediumint',

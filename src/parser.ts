@@ -84,9 +84,9 @@ function mapFieldType(s: string): string {
   return mapType(s);
 }
 
-function mapDecimal(s: string): string {
+function mapBracket(type: string, s: string): string {
   for (;;) {
-    const start = s.indexOf('decimal(');
+    const start = s.indexOf(type + '(');
     if (start === -1) {
       return s;
     }
@@ -141,7 +141,8 @@ function mapCreateTable(s: string): Table {
   s = ss.join('(');
   s = s.split(');')[0];
   s = s.split('\n').join('');
-  s = mapDecimal(s);
+  s = mapBracket('decimal', s);
+  s = mapBracket('float', s);
   s = mapEnum(s, { tableName });
   const fields = s
     .split(',')
