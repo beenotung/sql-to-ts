@@ -1,5 +1,5 @@
-codeStyles
-emacs.xml
-jsTestFinder.xml
-vcs.xml
-workspace.xml
+*
+!modules.xml
+!*.iml
+!dictionaries/
+!.gitignore
