@@ -14,7 +14,7 @@ mappedTypes.set('double', 'number | string');
 
 mappedTypes.set('datetime', 'string | Date');
 mappedTypes.set('date', 'string');
-mappedTypes.set('timestamp', 'string');
+mappedTypes.set('timestamp', 'string | Date');
 
 mappedTypes.set('blob', 'Blob | Buffer | string');
 mappedTypes.set('longblob', 'Blob | Buffer | string');
