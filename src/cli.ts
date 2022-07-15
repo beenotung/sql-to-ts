@@ -12,7 +12,7 @@ Usage:
 Options:
   -o, --tsDir [File]     output directory for Typescript Files (Default is out)
   -q, --quiet [Flag]     Quiet mode (Default is off)
-  -c, --clean [Flag]     clean the output directory before witting (Default is off)
+  -c, --clean [Flag]     clean the output directory before writing generated files (Default is off)
   -h, --help             Display help and usage details`;
 }
 
